@@ -64,13 +64,19 @@ public class PlayerController : MonoBehaviour {
 		newPos += transform.position;
 //		this.transform.position += (dir * 4 * Time.deltaTime);
 		Vector3 pos = Camera.main.WorldToViewportPoint(newPos);
-		float offetX = spriteRender.sprite.bounds.size.x *10;
+		float offetX = spriteRender.sprite.bounds.size.x *2 / Screen.width/2;
 	
 		float x = Mathf.Clamp(pos.x, 0.0f, 1.0f - offetX);
 		Debug.LogError(x);
 		float y =  Mathf.Clamp(pos.y, 0.0f, 1.0f);
 		pos = new Vector3(x, y, pos.z);
 		Vector3 worldPos =  Camera.main.ViewportToWorldPoint(pos);
+//		if(x == 1.0f)
+//		{
+//			Debug.Log(worldPos);
+//			worldPos.x -= Mathf.RoundToInt(spriteRender.sprite.bounds.size.x *2);
+//			Debug.LogError(worldPos);
+//		}
 		transform.position = worldPos;
 
 	}
