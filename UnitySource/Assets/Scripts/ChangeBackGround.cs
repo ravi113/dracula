@@ -16,7 +16,7 @@ public class ChangeBackGround : MonoBehaviour {
 		
 		float worldScreenHeight=Camera.main.orthographicSize*2f;
 		float worldScreenWidth=worldScreenHeight/Screen.height*Screen.width;
-		
+		//aaaaaa
 		transform.localScale = new Vector3(
 			worldScreenWidth / sr.sprite.bounds.size.x,
 			worldScreenHeight / sr.sprite.bounds.size.y, 1);
