@@ -20,28 +20,13 @@ public class ParseLoginScript : MonoBehaviour {
 		
 		if (!string.IsNullOrEmpty (usernameVal)) {
 			Debug.Log("Calling Login....");
-			StartCoroutine(callParseLogin(usernameVal, pwdVal));
-		}
-	}
-
-	protected IEnumerator callParseLogin(string u, string pwd) {
-		var taskLogin = ParseUser.LogInAsync (u, pwd);
-		taskLogin.ContinueWith (t => {
-			if (t.Result == null) {
-				Debug.LogWarning ("Login fail");
-			} else {
-				Debug.Log("Welcome " + t.Result.Username);
-			}
-		});
-
-		yield return taskLogin ;
-	}
-
-	protected void OnLoginComplete(Task<ParseUser> t) {
-		if (t.Result == null) {
-			Debug.LogWarning ("Login fail");
-		} else {
-			Debug.Log("Welcome " + t.Result.Username);
+			ParseUser.LogInAsync (usernameVal, pwdVal).ContinueWith (t => {
+				if (t.Result == null) {
+					Debug.LogWarning ("Login fail");
+				} else {
+					Debug.Log("Welcome " + t.Result.Username);
+				}
+			});
 		}
 	}
 }
