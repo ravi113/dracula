@@ -2,6 +2,8 @@
 using System.Collections;
 using Parse;
 using UnityEngine.UI;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 public class ParseLoginScript : MonoBehaviour {
 	public Text usernameField;
@@ -15,22 +17,31 @@ public class ParseLoginScript : MonoBehaviour {
 	public void Login() {
 		string usernameVal = usernameField.text;
 		string pwdVal = passwordField.text;
-
+		
 		if (!string.IsNullOrEmpty (usernameVal)) {
-		 	ParseUser.LogInAsync(usernameVal, pwdVal).ContinueWith(t => {
-				if(t.IsFaulted || t.IsCanceled) {
-					// Login fail
-					//Text status = GameObject.Find("statusText").GetComponent<Text>();
-					//status.text = "Fail to login";
-					Debug.LogWarning("Fail to login");
-				}
-				else {
-					// Login Success
-					usernameField.enabled = false;
-					passwordField.enabled = false;
-					usernameField.text = "welcome " + ParseUser.CurrentUser.Username;
-				}
-			});
+			Debug.Log("Calling Login....");
+			StartCoroutine(callParseLogin(usernameVal, pwdVal));
+		}
+	}
+
+	protected IEnumerator callParseLogin(string u, string pwd) {
+		var taskLogin = ParseUser.LogInAsync (u, pwd);
+		taskLogin.ContinueWith (t => {
+			if (t.Result == null) {
+				Debug.LogWarning ("Login fail");
+			} else {
+				Debug.Log("Welcome " + t.Result.Username);
+			}
+		});
+
+		yield return taskLogin ;
+	}
+
+	protected void OnLoginComplete(Task<ParseUser> t) {
+		if (t.Result == null) {
+			Debug.LogWarning ("Login fail");
+		} else {
+			Debug.Log("Welcome " + t.Result.Username);
 		}
 	}
 }

@@ -911,7 +911,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1586816315}
-  - 114: {fileID: 1586816317}
   - 114: {fileID: 1586816316}
   m_Layer: 0
   m_Name: ParseInstance
@@ -943,21 +942,8 @@ MonoBehaviour:
   m_Script: {fileID: 762677091, guid: 73d09671db9f2974683288d627a9c2c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applicationID: DulNm01z121uPB2Nq4nWMklLqJAvCKscTc0Ngotp
-  dotnetKey: 5gQy3I0ufE6RYLYf0npaPfXkidg0dVQPsX3E2P6r
---- !u!114 &1586816317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1586816314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be43dd5f05f884919aed33d5957b10ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  usernameField: {fileID: 73120343}
-  passwordField: {fileID: 379913827}
+  applicationID: BOe2VEcNzruhAds5P7An3wJsXkyz8ta61CpiqSwW
+  dotnetKey: e7sG5K1VqcDw2TKjn6eFefbYqiDc31HUt4JppdKW
 --- !u!1 &1589257115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,6 +1094,7 @@ GameObject:
   - 222: {fileID: 1732861813}
   - 114: {fileID: 1732861812}
   - 114: {fileID: 1732861811}
+  - 114: {fileID: 1732861814}
   m_Layer: 5
   m_Name: btnLogin
   m_TagString: Untagged
@@ -1172,7 +1159,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1586816317}
+      - m_Target: {fileID: 1732861814}
         m_MethodName: Login
         m_Mode: 1
         m_Arguments:
@@ -1213,6 +1200,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1732861809}
+--- !u!114 &1732861814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1732861809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be43dd5f05f884919aed33d5957b10ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usernameField: {fileID: 73120343}
+  passwordField: {fileID: 379913827}
 --- !u!1 &1895862712
 GameObject:
   m_ObjectHideFlags: 0
