@@ -1,5 +1,34 @@
 ﻿using UnityEngine;
 
+
+//========================================================
+// class BaseSingleton
+//========================================================
+// - for making singleton object
+// - usage
+//		+ declare class(derived )	
+//			public class OnlyOne : BaseSingleton< OnlyOne >
+//		+ client
+//			OnlyOne.Instance.[method]
+//========================================================
+public abstract class Singleton<T> where T : new()
+{
+	protected static T instance;
+	public static T Instance
+	{
+		get
+		{
+			if (instance == null)
+			{
+				instance = new T();
+			}
+			return instance;
+		}
+	}
+}
+
+
+
 /// <summary>
 /// Be aware this will not prevent a non singleton constructor
 ///   such as `T myT = new T();`
@@ -7,7 +36,7 @@
 /// 
 /// As a note, this is made as MonoBehaviour because we need Coroutines.
 /// </summary>
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+public class SingletonMono<T> : MonoBehaviour where T : MonoBehaviour
 {
 	private static T _instance;
 	
@@ -18,7 +47,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 		get
 		{
 			if (applicationIsQuitting) {
-				Debug.LogWarning("[Singleton] Instance '"+ typeof(T) +
+				Debug.LogError("[Singleton] Instance '"+ typeof(T) +
 				                 "' already destroyed on application quit." +
 				                 " Won't create again - returning null.");
 				return null;
@@ -42,16 +71,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 					{
 						GameObject singleton = new GameObject();
 						_instance = singleton.AddComponent<T>();
-						singleton.name = "(singleton) "+ typeof(T).ToString();
+						singleton.name = "Singleton_"+ typeof(T).ToString();
 						
 						DontDestroyOnLoad(singleton);
-						
-						Debug.Log("[Singleton] An instance of " + typeof(T) + 
-						          " is needed in the scene, so '" + singleton +
-						          "' was created with DontDestroyOnLoad.");
-					} else {
-						Debug.Log("[Singleton] Using instance already created: " +
-						          _instance.gameObject.name);
+
 					}
 				}
 				
@@ -70,6 +93,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 	/// So, this was made to be sure we're not creating that buggy ghost object.
 	/// </summary>
 	public void OnDestroy () {
-//		applicationIsQuitting = true;
+		applicationIsQuitting = true;
 	}
 }
